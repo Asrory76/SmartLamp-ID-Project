@@ -1,0 +1,81 @@
+{% block navbar_menu %}{% endblock %}
+{% block mobile_menu_dropdown %}{% endblock %}
+
+{% block footer %}
+  <footer class="absolute bottom-4 w-full text-center">
+    <p class="text-xs text-white/20">
+      &copy; <script>document.write(new Date().getFullYear())</script> SmartLamp ID. Secure Login.
+    </p>
+  </footer>
+{% endblock %}
+
+{% extends "layout.html" %}
+
+{% block title %}Login SmartLamp ID{% endblock %}
+
+{% block content %}
+<section class="min-h-[85vh] flex items-center justify-center px-4 py-12 relative overflow-hidden">
+    
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-brandYellow/5 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="w-full max-w-md bg-brandDark/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl relative" 
+         data-aos="zoom-in" data-aos-duration="600">
+        
+        <div class="text-center mb-8">
+            <div class="w-12 h-12 bg-brandYellow rounded-full flex items-center justify-center mx-auto mb-4 shadow-[0_0_20px_rgba(255,193,7,0.3)]">
+                <i class="fa-solid fa-user text-brandBlack text-xl"></i>
+            </div>
+            <h2 class="font-heading text-2xl font-bold text-white">Selamat Datang</h2>
+            <p class="text-sm text-white/50 mt-2">Masuk untuk mengakses kontrol SmartLamp.</p>
+        </div>
+
+        <form action="{{ url_for('login') }}" method="POST" class="space-y-5">
+            
+            <div class="space-y-1">
+                <label class="text-xs font-medium text-white/70 ml-1">Email Address</label>
+                <div class="relative group">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-white/40 group-focus-within:text-brandYellow transition-colors">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <input type="email" name="email" required 
+                        class="w-full pl-11 pr-4 py-3 bg-brandBlack/50 border border-white/10 rounded-xl focus:border-brandYellow focus:ring-1 focus:ring-brandYellow text-white placeholder-white/30 transition-all outline-none"
+                        placeholder="nama@email.com">
+                </div>
+            </div>
+
+            <div class="space-y-1">
+                <label class="text-xs font-medium text-white/70 ml-1">Password</label>
+                <div class="relative group">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-white/40 group-focus-within:text-brandYellow transition-colors">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                    
+                    <input id="passwordInput" type="password" name="password" required 
+                        class="w-full pl-11 pr-12 py-3 bg-brandBlack/50 border border-white/10 rounded-xl focus:border-brandYellow focus:ring-1 focus:ring-brandYellow text-white placeholder-white/30 transition-all outline-none"
+                        placeholder="••••••••">
+                    
+                    <button type="button" onclick="togglePassword()" 
+                        class="absolute inset-y-0 right-0 pr-4 flex items-center text-white/40 hover:text-brandYellow transition cursor-pointer focus:outline-none">
+                        <i id="eyeIcon" class="fa-solid fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+
+            <button type="submit" 
+                class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brandYellow to-yellow-500 text-brandBlack font-bold text-sm hover:shadow-[0_0_20px_rgba(255,193,7,0.4)] hover:scale-[1.02] transition-all duration-300 mt-2">
+                Masuk Sekarang
+            </button>
+        </form>
+
+        <p class="mt-8 text-center text-sm text-white/40">
+            Belum punya akun? 
+            <a href="{{ url_for('register') }}" class="text-brandYellow font-medium hover:underline transition">Daftar di sini</a>
+        </p>
+    </div>
+</section>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% endblock %}

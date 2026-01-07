@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %}Halaman Gelap SmartLamp ID{% endblock %}
+
+{% block navbar_menu %}
+  <nav class="flex items-center">
+      <a href="{{ url_for('home') }}" class="text-sm font-bold text-white/50 hover:text-brandYellow transition">
+          <i class="fa-solid fa-arrow-left mr-2"></i> Kembali
+      </a>
+  </nav>
+{% endblock %}
+
+{% block mobile_menu_dropdown %}{% endblock %}
+
+{% block content %}
+<section class="min-h-screen bg-brandBlack flex items-center justify-center relative overflow-hidden">
+    
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white/5 rounded-full blur-[150px] -z-10 pointer-events-none"></div>
+
+    <div class="text-center px-4 max-w-lg mx-auto relative z-10" data-aos="fade-up">
+        
+        <div class="relative w-24 h-24 mx-auto mb-8 text-white/20">
+            <i class="fa-regular fa-lightbulb text-8xl animate-pulse"></i>
+            <div class="absolute -bottom-2 -right-2 text-brandYellow text-4xl">
+                <i class="fa-solid fa-circle-exclamation"></i>
+            </div>
+        </div>
+
+        <h1 class="font-heading font-bold text-6xl text-white mb-2">404</h1>
+        <h2 class="font-heading font-semibold text-2xl text-white mb-4">Gelap Sekali di Sini.</h2>
+        
+        <p class="text-white/60 mb-8 leading-relaxed">
+            Halaman yang Anda cari sepertinya sudah dipindahkan atau bohlamnya putus.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="{{ url_for('home') }}" class="px-8 py-3 rounded-full bg-brandYellow text-brandBlack font-bold hover:shadow-[0_0_20px_rgba(255,193,7,0.4)] hover:scale-105 transition transform">
+                Nyalakan Lampu (Home)
+            </a>
+        </div>
+
+    </div>
+    
+    <div class="absolute bottom-6 text-white/20 text-xs">
+        &copy; SmartLamp ID
+    </div>
+
+</section>
+{% endblock %}
+
+{% block footer %}{% endblock %}

@@ -1,0 +1,268 @@
+{% extends "layout.html" %}
+
+{% block title %}SmartLamp ID - Lighting for Modern Living{% endblock %}
+
+{% block content %}
+
+<section class="relative min-h-[92vh] bg-brandBlack overflow-hidden flex items-center">
+    
+    <div class="absolute inset-0 z-0">
+        <img src="{{ url_for('static', filename='images/hero1.png') }}" 
+             alt="SmartLamp interior" 
+             class="w-full h-full object-cover opacity-80">
+        
+        <div id="heroOverlay" 
+             class="absolute inset-0 bg-gradient-to-r from-brandBlack via-brandBlack/85 to-brandBlack/10 transition-colors duration-1000">
+        </div>
+    </div>
+
+    <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16 md:py-24">
+        <div class="max-w-xl space-y-6">
+            
+            <p class="text-xs tracking-[0.25em] uppercase text-white/60" data-aos="fade-right">
+                Smart • Minimal • Warm
+            </p>
+
+            <h1 class="font-heading font-semibold text-3xl sm:text-4xl md:text-5xl leading-tight" 
+                data-aos="fade-up" data-aos-delay="100">
+                Pencahayaan <span class="text-brandYellow">pintar</span><br>
+                untuk ruang yang tenang<br class="hidden sm:block"> dan hangat.
+            </h1>
+
+            <div class="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md w-fit" 
+                 data-aos="fade-up" data-aos-delay="200">
+                <p class="text-[10px] text-white/50 mb-2 uppercase tracking-widest font-semibold">
+                    Coba Simulasi Suasana:
+                </p>
+                <div class="flex gap-2">
+                    <button id="modeWarm" class="px-4 py-2 rounded-lg border border-brandYellow/30 text-brandYellow hover:bg-brandYellow hover:text-brandBlack transition text-xs font-bold flex items-center gap-2">
+                        <i class="fa-regular fa-sun"></i> Warm
+                    </button>
+                    <button id="modeCool" class="px-4 py-2 rounded-lg border border-cyan-300/30 text-cyan-300 hover:bg-cyan-300 hover:text-brandBlack transition text-xs font-bold flex items-center gap-2">
+                        <i class="fa-regular fa-snowflake"></i> Cool
+                    </button>
+                    <button id="modeOff" class="px-3 py-2 rounded-lg border border-white/10 text-white/40 hover:bg-white/10 hover:text-white transition text-xs">
+                        Off
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap gap-3 pt-4" data-aos="fade-up" data-aos-delay="300">
+                <a href="#produk" class="px-6 py-3 rounded-full bg-brandYellow text-brandBlack text-sm font-semibold hover:brightness-95 transition shadow-[0_0_20px_rgba(255,193,7,0.3)]">
+                    Belanja Sekarang
+                </a>
+                <a href="{{ url_for('about') }}" class="px-6 py-3 rounded-full border border-white/25 text-sm hover:border-white/60 hover:bg-white/5 transition">
+                    Tentang Kami
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="koleksi" class="bg-brandDark scroll-mt-20 py-16 lg:py-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+            <div data-aos="fade-right">
+                <h2 class="font-heading font-semibold text-2xl sm:text-3xl">Pilih Suasana Anda</h2>
+                <p class="mt-3 text-sm sm:text-base text-white/70 max-w-xl">
+                    Tentukan nuansa ruangan yang ingin dibangun: hangat untuk istirahat, atau putih terang untuk produktivitas.
+                </p>
+            </div>
+            <p class="text-xs text-white/50 uppercase tracking-[0.25em]" data-aos="fade-left">
+                Curated for Modern Homes
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <article class="group rounded-3xl overflow-hidden bg-brandBlack border border-white/10 hover:border-brandYellow/60 hover:shadow-[0_0_40px_rgba(255,193,7,0.2)] transition duration-500" 
+                     data-aos="fade-up" data-aos-delay="100">
+                <div class="aspect-[4/3] overflow-hidden">
+                    <img src="{{ url_for('static', filename='images/warm.png') }}" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                         alt="Warm ambience">
+                </div>
+                <div class="p-6">
+                    <p class="text-xs uppercase tracking-wide text-brandYellow font-semibold">Cozy Warm</p>
+                    <h3 class="mt-2 font-medium text-lg">Warm Series</h3>
+                    <p class="mt-2 text-sm text-white/70">Cahaya keemasan (3000K) yang lembut untuk kamar tidur.</p>
+                </div>
+            </article>
+
+            <article class="group rounded-3xl overflow-hidden bg-brandBlack border border-white/10 hover:border-brandYellow/60 hover:shadow-[0_0_40px_rgba(255,193,7,0.2)] transition duration-500" 
+                     data-aos="fade-up" data-aos-delay="200">
+                <div class="aspect-[4/3] overflow-hidden">
+                    <img src="{{ url_for('static', filename='images/cool.png') }}" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                         alt="Cool ambience">
+                </div>
+                <div class="p-6">
+                    <p class="text-xs uppercase tracking-wide text-white/60 font-semibold">Focused White</p>
+                    <h3 class="mt-2 font-medium text-lg">Cool Series</h3>
+                    <p class="mt-2 text-sm text-white/70">Cahaya putih bersih (6000K) untuk ruang kerja & dapur.</p>
+                </div>
+            </article>
+
+            <article class="group rounded-3xl overflow-hidden bg-brandBlack border border-white/10 hover:border-brandYellow/60 hover:shadow-[0_0_40px_rgba(255,193,7,0.2)] transition duration-500" 
+                     data-aos="fade-up" data-aos-delay="300">
+                <div class="aspect-[4/3] overflow-hidden">
+                    <img src="{{ url_for('static', filename='images/bundle.png') }}" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                         alt="Bundle">
+                </div>
+                <div class="p-6">
+                    <p class="text-xs uppercase tracking-wide text-white/60 font-semibold">Complete Set</p>
+                    <h3 class="mt-2 font-medium text-lg">Bundle Kit</h3>
+                    <p class="mt-2 text-sm text-white/70">Paket kombinasi hemat untuk mengisi satu ruangan penuh.</p>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<section id="produk" class="bg-brandBlack scroll-mt-20 py-20 lg:py-14 relative">
+    
+    <div class="absolute top-1/4 left-0 w-96 h-96 bg-brandYellow/5 rounded-full blur-3xl -z-10 pointer-events-none"></div>
+    <div class="absolute bottom-1/4 right-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl -z-10 pointer-events-none"></div>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+            <div data-aos="fade-right">
+                <h2 class="font-heading font-semibold text-2xl sm:text-3xl">Katalog Produk</h2>
+                <p class="mt-3 text-sm sm:text-base text-white/70 max-w-xl leading-relaxed">
+                    Spesifikasi Pro: Fitting E27 Universal, Koneksi Wi-Fi Langsung (Tanpa Hub), dan Kontrol Aplikasi.
+                </p>
+            </div>
+            <p class="text-xs text-white/50 uppercase tracking-[0.25em] font-medium" data-aos="fade-left">Shop Now</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            {% for product in products %}
+            <article class="group bg-white/5 backdrop-blur-sm rounded-3xl border border-white/10 overflow-hidden hover:border-brandYellow/50 transition-all duration-500 relative flex flex-col" 
+                     data-aos="fade-up" data-aos-delay="{{ loop.index * 100 }}">
+                
+                <div class="absolute top-4 left-4 z-10">
+                    {% if 'Bundle' in product.name %}
+                        <span class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider bg-gradient-to-r from-brandYellow to-yellow-500 text-brandBlack rounded-full shadow-lg">
+                            <i class="fa-solid fa-tags mr-1"></i> Paket Hemat
+                        </span>
+                    {% elif product.price < 96000 %}
+                        <span class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider bg-brandYellow text-brandBlack rounded-full shadow-lg">
+                            Best Seller
+                        </span>
+                    {% else %}
+                        <span class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider bg-white/20 text-white backdrop-blur-md border border-white/20 rounded-full shadow-lg">
+                            Favorit
+                        </span>
+                    {% endif %}
+                </div>
+                
+                <div class="aspect-[4/3] overflow-hidden relative">
+                    <a href="{{ url_for('detail_product', product_id=product.id) }}">
+                        <img src="{{ url_for('static', filename='images/' + product.image) }}" 
+                             class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700">
+                        <div class="absolute inset-0 bg-brandBlack/0 group-hover:bg-brandBlack/20 transition duration-500"></div>
+                    </a>
+                </div>
+
+                <div class="p-6 lg:p-7 flex-grow flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-heading font-semibold text-xl truncate">
+                            <a href="{{ url_for('detail_product', product_id=product.id) }}" class="hover:text-brandYellow transition">
+                                {{ product.name }}
+                            </a>
+                        </h3>
+                        
+                        <div class="flex gap-4 mt-3 mb-5 text-white/50 text-xs">
+                            <span><i class="fa-solid fa-wifi"></i> WiFi</span>
+                            <span><i class="fa-regular fa-lightbulb"></i> {{ product.specs[:15] }}...</span>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <p class="text-xs text-white/60 mb-1">Harga Penawaran</p>
+                            <p class="text-2xl font-bold text-brandYellow">
+                                Rp{{ "{:,.0f}".format(product.price).replace(',', '.') }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-2 mt-auto">
+                        <a href="{{ url_for('add_to_cart', product_id=product.id) }}" 
+                           class="w-12 h-12 rounded-xl border border-brandYellow text-brandYellow hover:bg-brandYellow hover:text-brandBlack transition flex items-center justify-center flex-shrink-0" 
+                           title="Tambah ke Keranjang">
+                            <i class="fa-solid fa-cart-plus text-lg"></i>
+                        </a>
+                        <a href="{{ url_for('detail_product', product_id=product.id) }}" 
+                           class="flex-grow h-12 rounded-xl bg-gradient-to-r from-brandYellow to-yellow-500 text-brandBlack font-bold text-sm hover:shadow-[0_0_20px_rgba(255,193,7,0.4)] transition flex items-center justify-center gap-2">
+                            Beli Sekarang
+                        </a>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+
+<section id="galeri" class="bg-brandBlack scroll-mt-20 py-14 md:py-20 border-t border-white/5">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="mb-8" data-aos="fade-up">
+            <h2 class="font-heading font-semibold text-2xl sm:text-3xl">Inspirasi Ruang</h2>
+            <p class="mt-3 text-sm text-white/70 max-w-xl">
+                Lihat bagaimana SmartLamp mengubah suasana di berbagai sudut rumah pengguna kami.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            
+            <div class="space-y-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="rounded-3xl overflow-hidden bg-brandDark h-52 md:h-64 border border-white/5">
+                    <img src="{{ url_for('static', filename='images/hero1.png') }}" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                </div>
+                <div class="rounded-3xl overflow-hidden bg-brandDark h-40 md:h-48 border border-white/5">
+                    <img src="{{ url_for('static', filename='images/warm.png') }}" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                </div>
+            </div>
+            
+            <div class="rounded-3xl overflow-hidden bg-brandDark h-60 md:h-full border border-white/5" data-aos="fade-up" data-aos-delay="200">
+                <img src="{{ url_for('static', filename='images/cool.png') }}" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+            </div>
+            
+            <div class="space-y-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="rounded-3xl overflow-hidden bg-brandDark h-40 md:h-48 border border-white/5">
+                    <img src="{{ url_for('static', filename='images/produk1.jpg') }}" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                </div>
+                <div class="rounded-3xl overflow-hidden bg-brandDark h-52 md:h-64 border border-white/5">
+                    <img src="{{ url_for('static', filename='images/bundle.png') }}" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="bg-brandDark py-16 border-t border-white/5">
+    <div class="max-w-4xl mx-auto px-4 text-center" data-aos="fade-up">
+        <div class="w-16 h-16 bg-white/5 rounded-full grid place-items-center mx-auto mb-6 border border-white/10 text-brandYellow text-2xl">
+            <i class="fa-regular fa-lightbulb"></i>
+        </div>
+        <h2 class="font-heading font-semibold text-2xl sm:text-3xl mb-4">Kenapa Memilih Kami?</h2>
+        <p class="text-white/60 mb-8 max-w-xl mx-auto leading-relaxed">
+            SmartLamp ID lahir dari misi sederhana: mendemokratisasi teknologi smart home agar mudah diakses siapa saja. Tanpa hub, tanpa ribet, garansi resmi.
+        </p>
+        <a href="{{ url_for('about') }}" class="inline-flex items-center gap-2 text-brandYellow font-bold hover:underline transition">
+            Baca Cerita Lengkap <i class="fa-solid fa-arrow-right"></i>
+        </a>
+    </div>
+</section>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+{% endblock %}

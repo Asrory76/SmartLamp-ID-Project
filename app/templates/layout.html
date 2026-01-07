@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <title>{% block title %}SmartLamp ID{% endblock %}</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="{{ url_for('static', filename='assets/tailwind-config.js') }}"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/style.css') }}">
+
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+
+<body class="bg-brandBlack text-white font-body antialiased flex flex-col min-h-screen overflow-x-hidden w-full">
+
+  <header class="sticky top-0 z-50 border-b border-white/10 bg-brandBlack/90 backdrop-blur-md">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <a href="{{ url_for('home') }}" class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-full bg-brandYellow grid place-items-center shadow-glow text-brandBlack flex-shrink-0">
+          <img src="{{ url_for('static', filename='images/logo.png') }}" class="w-full h-full object-cover rounded-full" alt="Logo">
+        </div>
+        <div>
+          <p class="font-heading font-semibold tracking-tight text-sm sm:text-base">SmartLamp ID</p>
+        </div>
+      </a>
+
+      {% block navbar_menu %}
+        <nav class="hidden md:flex items-center gap-6 text-sm">
+          <a href="{{ url_for('home') }}" class="hover:text-brandYellow transition font-medium">Beranda</a>
+          <a href="{{ url_for('home') }}#produk" class="hover:text-brandYellow md-transition">Produk</a>
+          <a href="{{ url_for('about') }}" class="hover:text-brandYellow transition">Tentang Kami</a>
+          <a href="{{ url_for('contact') }}" class="hover:text-brandYellow transition">Hubungi Kami</a>
+          
+          <div class="flex items-center gap-4 pl-4 border-l border-white/10">
+            
+            {% if session.get('user_name') %}
+                
+                {% if session.get('user_role') == 'admin' %}
+                  <a href="{{ url_for('admin_dashboard') }}" class="text-xs font-bold px-3 py-1.5 rounded-lg bg-red-600 text-white hover:bg-red-700 transition shadow-lg shadow-red-900/20" title="Kembali ke Panel Admin">
+                      <i class="fa-solid fa-shield-halved mr-1"></i> Admin Panel
+                  </a>
+                {% endif %}
+                
+                {% if session.get('user_role') != 'admin' %}
+                    <a href="{{ url_for('cart') }}" class="text-white/70 hover:text-brandYellow transition relative group" title="Lihat Keranjang">
+                        <i class="fa-solid fa-cart-shopping text-lg"></i>
+                    </a>
+
+                    <a href="{{ url_for('dashboard') }}" class="text-xs font-semibold px-3 py-1.5 rounded-lg bg-white/10 hover:bg-brandYellow hover:text-brandBlack transition">
+                       Akun Saya
+                    </a>
+                {% endif %}
+                
+                <a href="{{ url_for('logout') }}" class="text-white/50 hover:text-red-400 transition" title="Logout">
+                   <i class="fa-solid fa-power-off"></i>
+                </a>
+
+            {% else %}
+                <a href="{{ url_for('login') }}" class="px-5 py-2 rounded-full bg-brandYellow text-brandBlack font-semibold hover:brightness-95 transition">Login</a>
+            {% endif %}
+          </div>
+        </nav>
+
+        <button id="menuBtn" class="md:hidden text-white p-2 focus:outline-none">
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+      {% endblock %}
+    </div>
+    
+    {% block mobile_menu_dropdown %}
+      <div id="mobileMenu" class="hidden md:hidden border-t border-white/10 bg-brandBlack absolute w-full left-0 top-16 z-50 shadow-2xl">
+         <div class="px-4 py-6 flex flex-col gap-4 text-sm font-medium">
+            <a href="{{ url_for('home') }}" class="hover:text-brandYellow transition py-2 border-b border-white/5 font-bold text-white">Beranda</a>
+            <a href="{{ url_for('home') }}#produk" class="hover:text-brandYellow transition py-2 border-b border-white/5">Produk</a>
+            <a href="{{ url_for('about') }}" class="hover:text-brandYellow transition py-2 border-b border-white/5">Tentang Kami</a>
+            
+            <div class="border-t border-white/10 my-2"></div>
+            
+            {% if session.get('user_name') %}
+              <div class="py-2">
+                 <div class="flex items-center gap-3 mb-3 px-2">
+                    <div class="w-8 h-8 rounded-full bg-brandYellow text-brandBlack grid place-items-center font-bold">
+                        {{ session['user_name'][:1] }}
+                    </div>
+                    <span class="text-white font-bold">
+                        {{ session['user_name'] }}
+                        {% if session.get('user_role') == 'admin' %}
+                           <span class="text-[10px] bg-red-600 text-white px-1.5 py-0.5 rounded ml-2 align-middle">ADMIN</span>
+                        {% endif %}
+                    </span>
+                 </div>
+                 
+                 {% if session.get('user_role') == 'admin' %}
+                 <a href="{{ url_for('admin_dashboard') }}" class="block w-full text-center px-4 py-3 rounded-lg bg-red-600 text-white hover:bg-red-700 transition mb-2 font-bold">
+                    <i class="fa-solid fa-shield-halved mr-1"></i> Ke Admin Panel
+                 </a>
+                 {% endif %}
+
+                 {% if session.get('user_role') != 'admin' %}
+                    <a href="{{ url_for('cart') }}" class="hover:text-brandYellow transition py-2 border-b border-white/5 flex items-center gap-2">
+                        <i class="fa-solid fa-cart-shopping"></i> Keranjang Belanja
+                    </a>
+                    <a href="{{ url_for('dashboard') }}" class="block w-full text-center px-4 py-3 rounded-lg bg-white/10 hover:bg-brandYellow hover:text-brandBlack transition mb-2 mt-2">Ke Dashboard Member</a>
+                 {% endif %}
+
+                 <a href="{{ url_for('logout') }}" class="block w-full text-center px-4 py-3 rounded-lg border border-red-500/30 text-red-400 hover:bg-red-500/10 transition mt-2">Logout</a>
+              </div>
+            {% else %}
+              <a href="{{ url_for('login') }}" class="block w-full text-center px-4 py-3 rounded-lg bg-brandYellow text-brandBlack font-bold hover:brightness-95 transition mt-2">Login / Daftar</a>
+            {% endif %}
+         </div>
+      </div>
+    {% endblock %}
+  </header>
+
+  <main class="flex-grow w-full">
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div id="flash-messages" 
+             class="fixed top-24 left-1/2 transform -translate-x-1/2 z-[100] w-full max-w-md px-4 flex flex-col items-center gap-2 pointer-events-none">
+          {% for category, message in messages %}
+            <div class="pointer-events-auto shadow-2xl rounded-xl p-4 flex items-center gap-3 border backdrop-blur-md transition-all duration-500 ease-out transform translate-y-0 opacity-100
+              {% if category == 'error' %} bg-red-900/90 text-white border-red-500/50 
+              {% else %} bg-green-900/90 text-white border-green-500/50 {% endif %}">
+              <div class="flex-shrink-0">
+                {% if category == 'error' %} <i class="fa-solid fa-circle-exclamation text-lg"></i>
+                {% else %} <i class="fa-solid fa-circle-check text-lg"></i> {% endif %}
+              </div>
+              <div class="text-sm font-medium">{{ message }}</div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+    
+  </main>
+
+  {% block footer %}
+    <footer class="bg-brandBlack border-t border-white/10 mt-6 w-full">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12 flex flex-col md:flex-row gap-8 md:gap-12 justify-between">
+        <div class="max-w-sm">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-brandYellow grid place-items-center shadow-glow text-brandBlack flex-shrink-0">
+              <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="w-full h-full object-cover rounded-full">
+            </div>
+            <p class="font-heading font-semibold text-lg">SmartLamp ID</p>
+          </div>
+          <p class="mt-4 text-sm text-white/70">
+            Pencahayaan pintar untuk rumah modern — minimalis, hangat, dan terhubung.
+          </p>
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-white">Kontak</p>
+          <ul class="mt-4 space-y-2 text-sm text-white/70">
+            <li>Email: <a href="mailto:smartlamp.id@gmail.com" class="text-brandYellow hover:underline">smartlamp.id@gmail.com</a></li>
+            <li>Instagram: <a href="https://instagram.com/smart_lamp.id" target="_blank" class="text-brandYellow hover:underline">@smart_lamp.id</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="text-sm font-semibold text-white">Navigasi</p>
+          <ul class="mt-4 space-y-2 text-sm text-white/70">
+            <li><a href="{{ url_for('home') }}" class="hover:text-brandYellow">Beranda</a></li>
+            <li><a href="{{ url_for('home') }}#produk" class="hover:text-brandYellow">Produk</a></li>
+            <li><a href="{{ url_for('about') }}" class="hover:text-brandYellow">Tentang Kami</a></li>
+            <li><a href="{{ url_for('contact') }}" class="hover:text-brandYellow">Hubungi Kami</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-white/10 py-6">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-xs text-white/50 text-center sm:text-left">
+          <p>&copy; <span id="year"></span> SmartLamp ID. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  {% endblock %}
+
+  <script src="{{ url_for('static', filename='assets/scripts.js') }}"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+      AOS.init({ duration: 800, once: true, offset: 50, disable: 'mobile' });
+      // Tahun otomatis
+      document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

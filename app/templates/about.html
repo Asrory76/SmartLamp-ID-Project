@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+
+{% block title %}Tentang Kami SmartLamp ID{% endblock %}
+
+{% block content %}
+<section class="min-h-screen bg-brandBlack relative overflow-hidden pt-12 pb-20">
+    
+    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-brandYellow/5 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center mb-16" data-aos="fade-down">
+            <p class="text-xs tracking-[0.3em] uppercase text-brandYellow font-bold mb-3">OUR JOURNEY</p>
+            <h1 class="font-heading font-bold text-3xl md:text-5xl text-white">Mengenal SmartLamp ID</h1>
+            <p class="mt-4 text-white/60 max-w-2xl mx-auto">
+                Kami percaya bahwa pencahayaan bukan sekadar penerang ruangan, melainkan elemen kunci yang membangun suasana hati dan kenyamanan hidup.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12 items-center mb-24">
+            
+            <div class="relative" data-aos="fade-right">
+                <div class="overflow-hidden rounded-3xl border border-white/10 shadow-2xl relative group h-[400px]">
+                    <img 
+                        src="{{ url_for('static', filename='images/story.jpg') }}" 
+                        alt="Office" 
+                        class="w-full h-full object-cover transform group-hover:scale-105 transition duration-1000"
+                    >
+                    <div class="absolute inset-0 bg-gradient-to-t from-brandBlack/80 to-transparent"></div>
+                </div>
+            </div>
+
+            <div data-aos="fade-left">
+                <h2 class="font-heading font-semibold text-2xl md:text-3xl mb-6">
+                    Bermula dari Kebutuhan Sederhana
+                </h2>
+                <div class="space-y-4 text-white/70 text-sm leading-relaxed text-justify">
+                    <p>
+                        SmartLamp ID didirikan pada tahun 2024 dengan satu tujuan: mendemokratisasi teknologi *smart home*. Kami melihat banyak solusi pencahayaan pintar yang terlalu mahal atau terlalu rumit untuk digunakan sehari-hari.
+                    </p>
+                    <p>
+                        Kami merancang produk yang **Minimalis**, **Intuitif**, dan **Terjangkau**. Tanpa hub tambahan yang ribet, tanpa aplikasi yang membingungkan. Cukup pasang, sambungkan, dan rasakan perubahannya.
+                    </p>
+                    <p>
+                        Hari ini, SmartLamp ID telah menerangi ribuan sudut rumah di Indonesia, menemani momen fokus bekerja hingga istirahat yang tenang.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6 mb-24">
+            <div class="bg-white/5 border border-white/10 p-8 rounded-3xl backdrop-blur-sm hover:border-brandYellow/50 transition group" data-aos="fade-up" data-aos-delay="0">
+                <div class="w-12 h-12 bg-brandYellow/10 text-brandYellow rounded-xl grid place-items-center text-xl mb-4 group-hover:scale-110 transition">
+                    <i class="fa-solid fa-lightbulb"></i>
+                </div>
+                <h3 class="font-heading font-bold text-lg mb-2">Inovasi Simpel</h3>
+                <p class="text-xs text-white/50 leading-relaxed">
+                    Teknologi canggih tidak harus rumit. Kami memastikan setiap produk mudah digunakan oleh siapa saja, bahkan nenek Anda sekalipun.
+                </p>
+            </div>
+            <div class="bg-white/5 border border-white/10 p-8 rounded-3xl backdrop-blur-sm hover:border-brandYellow/50 transition group" data-aos="fade-up" data-aos-delay="100">
+                <div class="w-12 h-12 bg-blue-500/10 text-blue-400 rounded-xl grid place-items-center text-xl mb-4 group-hover:scale-110 transition">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <h3 class="font-heading font-bold text-lg mb-2">Hemat Energi</h3>
+                <p class="text-xs text-white/50 leading-relaxed">
+                    Semua produk kami menggunakan LED efisiensi tinggi yang hemat daya dan tahan lama, mendukung gaya hidup berkelanjutan.
+                </p>
+            </div>
+            <div class="bg-white/5 border border-white/10 p-8 rounded-3xl backdrop-blur-sm hover:border-brandYellow/50 transition group" data-aos="fade-up" data-aos-delay="200">
+                <div class="w-12 h-12 bg-green-500/10 text-green-400 rounded-xl grid place-items-center text-xl mb-4 group-hover:scale-110 transition">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <h3 class="font-heading font-bold text-lg mb-2">Fokus Pelanggan</h3>
+                <p class="text-xs text-white/50 leading-relaxed">
+                    Kepuasan Anda adalah prioritas. Tim support kami siap membantu kapan saja jika Anda mengalami kendala instalasi.
+                </p>
+            </div>
+        </div>
+
+        <div class="text-center border-t border-white/10 pt-16" data-aos="fade-up">
+            <h2 class="font-heading font-semibold text-2xl mb-4">Ingin menjadi bagian dari cerita kami?</h2>
+            <p class="text-white/50 mb-8 text-sm">Mulai transformasi rumah Anda hari ini.</p>
+            <a href="{{ url_for('home') }}#produk" class="px-8 py-3 rounded-full bg-brandYellow text-brandBlack font-bold hover:shadow-[0_0_20px_rgba(255,193,7,0.3)] transition inline-flex items-center gap-2">
+                Lihat Katalog Produk <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+
+    </div>
+</section>
+{% endblock %}

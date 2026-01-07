@@ -1,0 +1,108 @@
+{% extends "layout.html" %}
+
+{% block title %}Hubungi Kami — SmartLamp ID{% endblock %}
+
+{% block content %}
+<section class="min-h-screen bg-brandBlack py-12 md:py-20 px-4 relative overflow-hidden">
+    
+    <div class="absolute top-0 left-0 w-96 h-96 bg-brandYellow/5 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
+
+    <div class="max-w-6xl mx-auto">
+        
+        <div class="text-center mb-16" data-aos="fade-down">
+            <p class="text-xs font-bold text-brandYellow tracking-[0.2em] uppercase mb-3">Get in Touch</p>
+            <h1 class="font-heading font-bold text-4xl md:text-5xl text-white mb-4">Hubungi Tim Kami</h1>
+            <p class="text-white/60 max-w-2xl mx-auto">Punya pertanyaan tentang produk, instalasi, atau kemitraan? Kami siap membantu Anda menerangi ruangan dengan cara yang lebih pintar.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            
+            <div class="space-y-6" data-aos="fade-right">
+                
+                <div class="bg-white/5 border border-white/10 p-6 rounded-2xl flex items-start gap-4 hover:border-brandYellow/50 transition duration-300">
+                    <div class="w-12 h-12 rounded-full bg-brandYellow/10 flex items-center justify-center text-brandYellow text-xl flex-shrink-0">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white text-lg">WhatsApp Support</h3>
+                        <p class="text-white/40 text-sm mb-1">Respon cepat (09.00 - 17.00 WIB)</p>
+                        <a href="https://wa.me/6282136427072" target="_blank" class="text-brandYellow font-bold hover:underline text-lg">+62 821-3642-7072</a>
+                    </div>
+                </div>
+
+                <div class="bg-white/5 border border-white/10 p-6 rounded-2xl flex items-start gap-4 hover:border-brandYellow/50 transition duration-300">
+                    <div class="w-12 h-12 rounded-full bg-brandYellow/10 flex items-center justify-center text-brandYellow text-xl flex-shrink-0">
+                        <i class="fa-regular fa-envelope"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white text-lg">Email</h3>
+                        <p class="text-white/40 text-sm mb-1">Untuk kerjasama & pertanyaan umum</p>
+                        <a href="mailto:smartlamp.id@gmail.com" class="text-brandYellow font-bold hover:underline text-lg">smartlamp.id@gmail.com</a>
+                    </div>
+                </div>
+
+                <div class="bg-white/5 border border-white/10 p-6 rounded-2xl flex items-start gap-4 hover:border-brandYellow/50 transition duration-300">
+                    <div class="w-12 h-12 rounded-full bg-brandYellow/10 flex items-center justify-center text-brandYellow text-xl flex-shrink-0">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white text-lg">Kantor Pusat</h3>
+                        <p class="text-white/60 text-sm leading-relaxed">
+                            Jl. Teknologi Masa Depan No. 88<br>
+                            Jakarta Selatan, Indonesia
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="bg-brandDark/50 border border-white/10 rounded-3xl p-8 md:p-10 backdrop-blur-md shadow-2xl" data-aos="fade-left">
+                <h3 class="font-heading font-bold text-2xl text-white mb-6">Kirim Pesan</h3>
+                
+                <form action="{{ url_for('contact') }}" method="POST" class="space-y-5">
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold text-white/50 uppercase tracking-wider">Nama</label>
+                            <input type="text" name="name" required 
+                                   value="{{ session.get('user_name', '') }}"
+                                   class="w-full bg-black/40 border border-white/10 rounded-xl p-3 text-white focus:border-brandYellow focus:outline-none transition" 
+                                   placeholder="Nama Anda">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-xs font-bold text-white/50 uppercase tracking-wider">Email</label>
+                            <input type="email" name="email" required 
+                                   class="w-full bg-black/40 border border-white/10 rounded-xl p-3 text-white focus:border-brandYellow focus:outline-none transition" 
+                                   placeholder="email@contoh.com">
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold text-white/50 uppercase tracking-wider">Subjek</label>
+                        <select name="subject" class="w-full bg-black/40 border border-white/10 rounded-xl p-3 text-white focus:border-brandYellow focus:outline-none transition">
+                            <option value="Pertanyaan Produk">Pertanyaan Produk</option>
+                            <option value="Kendala Teknis">Kendala Teknis / Instalasi</option>
+                            <option value="Klaim Garansi">Klaim Garansi</option>
+                            <option value="Kerjasama">Kerjasama / Bisnis</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold text-white/50 uppercase tracking-wider">Pesan</label>
+                        <textarea name="message" rows="4" required 
+                                  class="w-full bg-black/40 border border-white/10 rounded-xl p-3 text-white focus:border-brandYellow focus:outline-none transition resize-none" 
+                                  placeholder="Tulis pesan Anda di sini..."></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 rounded-xl bg-brandYellow text-brandBlack font-bold font-heading text-lg hover:shadow-[0_0_20px_rgba(255,193,7,0.4)] hover:brightness-110 transition mt-4">
+                        Kirim Pesan
+                    </button>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,121 @@
+{% block navbar_menu %}{% endblock %}
+{% block mobile_menu_dropdown %}{% endblock %}
+
+{% block footer %}
+  <footer class="absolute bottom-4 w-full text-center">
+    <p class="text-xs text-white/20">
+      &copy; <script>document.write(new Date().getFullYear())</script> SmartLamp ID. Secure Login.
+    </p>
+  </footer>
+{% endblock %}
+
+{% extends "layout.html" %}
+
+{% block title %}Daftar SmartLamp ID{% endblock %}
+
+{% block content %}
+<section class="min-h-[85vh] flex items-center justify-center px-4 py-12 relative overflow-hidden">
+    
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="absolute top-[10%] left-[-5%] w-96 h-96 bg-brandYellow/5 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-[-5%] right-[-5%] w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="w-full max-w-md bg-brandDark/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl relative" 
+         data-aos="fade-up" data-aos-duration="600">
+        
+        <div class="text-center mb-8">
+            <h2 class="font-heading text-2xl font-bold text-white">Buat Akun Baru</h2>
+            <p class="text-sm text-white/50 mt-2">Bergabunglah untuk menikmati fitur SmartLamp.</p>
+        </div>
+
+        <form action="{{ url_for('register') }}" method="POST" class="space-y-4">
+            
+            <div class="space-y-1">
+                <label class="text-xs font-medium text-white/70 ml-1">Nama Lengkap</label>
+                <div class="relative group">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-white/40 group-focus-within:text-brandYellow transition-colors">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <input type="text" name="name" required 
+                        class="w-full pl-11 pr-4 py-3 bg-brandBlack/50 border border-white/10 rounded-xl focus:border-brandYellow focus:ring-1 focus:ring-brandYellow text-white placeholder-white/30 transition-all outline-none"
+                        placeholder="Nama Anda">
+                </div>
+            </div>
+
+            <div class="space-y-1">
+                <label class="text-xs font-medium text-white/70 ml-1">Email Address</label>
+                <div class="relative group">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-white/40 group-focus-within:text-brandYellow transition-colors">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <input type="email" name="email" required 
+                        class="w-full pl-11 pr-4 py-3 bg-brandBlack/50 border border-white/10 rounded-xl focus:border-brandYellow focus:ring-1 focus:ring-brandYellow text-white placeholder-white/30 transition-all outline-none"
+                        placeholder="nama@email.com">
+                </div>
+            </div>
+
+            <div class="space-y-1">
+                <label class="text-xs font-medium text-white/70 ml-1">Password</label>
+                <div class="relative group">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-white/40 group-focus-within:text-brandYellow transition-colors">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                    <input id="pass1" type="password" name="password" required 
+                        class="w-full pl-11 pr-12 py-3 bg-brandBlack/50 border border-white/10 rounded-xl focus:border-brandYellow focus:ring-1 focus:ring-brandYellow text-white placeholder-white/30 transition-all outline-none"
+                        placeholder="Minimal 6 karakter">
+                    
+                    <button type="button" onclick="togglePass('pass1', 'icon1')" 
+                        class="absolute inset-y-0 right-0 pr-4 flex items-center text-white/40 hover:text-brandYellow transition cursor-pointer focus:outline-none">
+                        <i id="icon1" class="fa-solid fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="space-y-1">
+                <label class="text-xs font-medium text-white/70 ml-1">Konfirmasi Password</label>
+                <div class="relative group">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-white/40 group-focus-within:text-brandYellow transition-colors">
+                        <i class="fa-solid fa-check-double"></i>
+                    </div>
+                    <input id="pass2" type="password" name="confirm_password" required 
+                        class="w-full pl-11 pr-12 py-3 bg-brandBlack/50 border border-white/10 rounded-xl focus:border-brandYellow focus:ring-1 focus:ring-brandYellow text-white placeholder-white/30 transition-all outline-none"
+                        placeholder="Ulangi password">
+                    
+                    <button type="button" onclick="togglePass('pass2', 'icon2')" 
+                        class="absolute inset-y-0 right-0 pr-4 flex items-center text-white/40 hover:text-brandYellow transition cursor-pointer focus:outline-none">
+                        <i id="icon2" class="fa-solid fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+
+            <button type="submit" 
+                class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brandYellow to-yellow-500 text-brandBlack font-bold text-sm hover:shadow-[0_0_20px_rgba(255,193,7,0.4)] hover:scale-[1.02] transition-all duration-300 mt-4">
+                Daftar Sekarang
+            </button>
+        </form>
+
+        <p class="mt-6 text-center text-sm text-white/40">
+            Sudah punya akun? 
+            <a href="{{ url_for('login') }}" class="text-brandYellow font-medium hover:underline transition">Login di sini</a>
+        </p>
+    </div>
+</section>
+
+<script>
+    function togglePass(inputId, iconId) {
+        const input = document.getElementById(inputId);
+        const icon = document.getElementById(iconId);
+        
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
+        } else {
+            input.type = "password";
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
+        }
+    }
+</script>
+{% endblock %}

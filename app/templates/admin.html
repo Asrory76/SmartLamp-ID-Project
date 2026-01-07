@@ -1,0 +1,113 @@
+{% extends "layout.html" %}
+
+{% block title %}Panel Admin — SmartLamp ID{% endblock %}
+
+{% block navbar_menu %}
+<nav class="hidden md:flex items-center gap-6 text-sm">
+    <a href="{{ url_for('home') }}" class="hover:text-brandYellow transition font-medium flex items-center gap-2">
+        <i class="fa-solid fa-arrow-up-right-from-square"></i> Lihat Website
+    </a>
+    
+    <div class="flex items-center gap-4 pl-4 border-l border-white/10">
+        <span class="text-[10px] font-bold px-3 py-1 rounded bg-red-600 text-white cursor-default tracking-wider">
+            ADMIN MODE
+        </span>
+        
+        <a href="{{ url_for('logout') }}" class="text-white/50 hover:text-red-400 transition ml-2" title="Keluar">
+            <i class="fa-solid fa-power-off text-lg"></i>
+        </a>
+    </div>
+</nav>
+
+<button id="menuBtn" class="md:hidden text-white p-2 focus:outline-none">
+    <i class="fa-solid fa-bars text-xl"></i>
+</button>
+{% endblock %}
+
+{% block mobile_menu_dropdown %}
+<div id="mobileMenu" class="hidden md:hidden border-t border-white/10 bg-brandBlack absolute w-full left-0 top-16 z-50 shadow-2xl">
+   <div class="px-4 py-6 flex flex-col gap-4 text-sm font-medium">
+      <a href="{{ url_for('home') }}" class="hover:text-brandYellow transition py-2 border-b border-white/5">Lihat Website</a>
+      <a href="{{ url_for('logout') }}" class="block w-full text-center px-4 py-3 rounded-lg border border-red-500/30 text-red-400 hover:bg-red-500/10 transition mt-2">Logout Admin</a>
+   </div>
+</div>
+{% endblock %}
+{% block content %}
+<section class="min-h-screen bg-brandBlack py-10 px-4 md:px-8">
+    <div class="max-w-6xl mx-auto">
+        
+        <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+            <div>
+                <h1 class="font-heading font-bold text-3xl text-white">Panel Admin</h1>
+                <p class="text-white/50 text-sm mt-1">Kelola katalog produk SmartLamp.</p>
+            </div>
+            <a href="{{ url_for('add_product') }}" class="px-6 py-3 rounded-xl bg-brandYellow text-brandBlack font-bold hover:shadow-[0_0_20px_rgba(255,193,7,0.4)] hover:brightness-110 transition flex items-center gap-2">
+                <i class="fa-solid fa-plus"></i> Tambah Produk
+            </a>
+        </div>
+
+        <div class="bg-brandDark/50 border border-white/10 rounded-2xl overflow-hidden backdrop-blur-md shadow-2xl">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-white/80">
+                    <thead class="bg-white/5 text-brandYellow uppercase text-xs font-bold tracking-wider">
+                        <tr>
+                            <th class="p-5">Foto</th>
+                            <th class="p-5">Nama Produk</th>
+                            <th class="p-5">Harga</th>
+                            <th class="p-5">Kategori</th>
+                            <th class="p-5 text-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-white/10 text-sm">
+                        {% for product in products %}
+                        <tr class="hover:bg-white/5 transition group">
+                            <td class="p-4">
+                                <div class="w-14 h-14 rounded-lg overflow-hidden bg-black border border-white/10">
+                                    <img src="{{ url_for('static', filename='images/' + product.image) }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                                </div>
+                            </td>
+                            
+                            <td class="p-4 font-bold text-white text-base">{{ product.name }}</td>
+                            
+                            <td class="p-4 font-mono text-white/70">
+                                Rp {{ "{:,.0f}".format(product.price).replace(',', '.') }}
+                            </td>
+                            
+                            <td class="p-4">
+                                <span class="px-3 py-1 rounded-full border border-white/20 bg-white/5 text-xs text-white/60">
+                                    {{ product.category }}
+                                </span>
+                            </td>
+                            
+                            <td class="p-4 flex justify-center gap-3">
+                                <a href="{{ url_for('edit_product', product_id=product.id) }}" 
+                                   class="w-10 h-10 rounded-lg bg-blue-600/20 text-blue-400 hover:bg-blue-600 hover:text-white transition grid place-items-center"
+                                   title="Edit">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
+                                <a href="{{ url_for('delete_product', product_id=product.id) }}" 
+                                   onclick="return confirm('Yakin ingin menghapus {{ product.name }}?')"
+                                   class="w-10 h-10 rounded-lg bg-red-600/20 text-red-400 hover:bg-red-600 hover:text-white transition grid place-items-center"
+                                   title="Hapus">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="5" class="p-16 text-center text-white/40 flex flex-col items-center">
+                                <div class="w-16 h-16 bg-white/5 rounded-full grid place-items-center mb-4 text-2xl">
+                                    <i class="fa-solid fa-box-open"></i>
+                                </div>
+                                <p>Belum ada produk di database.</p>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+    </div>
+</section>
+{% endblock %}
